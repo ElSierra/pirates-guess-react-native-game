@@ -14,7 +14,7 @@ web-build/
 *.p8
 *.p12
 *.key
-*.env
+*.apk
 *.apk
 *.mobileprovision
 
