@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "pirates-guess",
+    "name": "Pirate's Guess",
     "slug": "pirates-guess",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -14,7 +14,9 @@
     "experiments": {
       "tsconfigPaths": true
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -22,7 +24,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "me.isaacojo.guess"
     },
     "web": {
       "favicon": "./src/assets/favicon.png"

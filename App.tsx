@@ -5,10 +5,12 @@ import { StyleSheet, Text, View } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import { NavigationContainer } from "@react-navigation/native";
 import { MainApp } from "@/navigation/Main";
-import { ImageBackground } from "expo-image";
+import { ImageBackground, ImageSource } from "expo-image";
+import { Asset, useAssets } from "expo-asset";
 import { useMusicStore } from "@/zustand/store";
 SplashScreen.preventAutoHideAsync();
 export default function App() {
+  const [assets, error] = useAssets([require("@/assets/images/bg.webp")]);
   const [fontsLoaded, fontError] = useFonts({
     breathFire: require("@/assets/fonts/BreatheFire.otf"),
     luckiestGuy: require("@/assets/fonts/LuckiestGuy-Regular.ttf"),
@@ -20,28 +22,28 @@ export default function App() {
     latoThin: require("@/assets/fonts/Lato-Thin.ttf"),
   });
   const onLoaded = useCallback(async () => {
-    if (fontsLoaded || fontError) {
+    if ((fontsLoaded && assets) || fontError) {
       console.log(
         "🚀 ~ file: App.tsx:19 ~ onLoaded ~ fontsLoaded:",
         fontsLoaded
       );
-      await SplashScreen.hideAsync();
+      setTimeout(async() => {
+      await SplashScreen.hideAsync();}, 1000);
     }
-  }, [fontsLoaded, fontError]);
+  }, [fontsLoaded, fontError, assets]);
 
   if (!fontsLoaded && !fontError) {
     return null;
   }
-  
+
   return (
     <NavigationContainer onReady={onLoaded}>
       <StatusBar style="light" />
-      <ImageBackground
-        style={{ flex: 1 }}
-        source={require("@/assets/images/bg.webp")}
-      >
-        <MainApp />
-      </ImageBackground>
+      {assets && (
+        <ImageBackground style={{ flex: 1 }} source={assets[0] as ImageSource}>
+          <MainApp />
+        </ImageBackground>
+      )}
     </NavigationContainer>
   );
 }
