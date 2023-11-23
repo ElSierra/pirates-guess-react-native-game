@@ -5,48 +5,31 @@ import Button from "@/components/global/Button";
 import { Audio } from "expo-av";
 import Title from "@/components/Menu/Title";
 import { MenuScreen } from "@/types/navigation";
+import { useMusicStore } from "@/zustand/store";
 
 const { height, width } = Dimensions.get("window");
 export default function Menu({ navigation }: MenuScreen) {
-  const [sound, setSound] = useState<Audio.Sound>();
-
-  async function playSound() {
-    console.log("Loading Sound");
-    const { sound } = await Audio.Sound.createAsync(
-      require("@/assets/audio/bg.mp3")
-    );
-    setSound(sound);
-
-    console.log("Playing Sound");
-    await sound.setIsLoopingAsync(true);
-    await sound.playAsync();
-  }
-
-  useEffect(() => {
-    return sound
-      ? () => {
-          console.log("Unloading Sound");
-          sound.unloadAsync();
-        }
-      : undefined;
-  }, [sound]);
-  useEffect(() => {
-    playSound();
-  }, []);
-
+  const { musicOn, off, on } = useMusicStore();
   return (
     <View style={{ flex: 1 }}>
-   
-        <View style={{ flex: 1, alignItems: "center" }}>
-          <Image
-            source={require("@/assets/images/pirate.png")}
-            style={{ height: height / 2, width: "100%" }}
-          />
+      <View style={{ flex: 1, alignItems: "center" }}>
+        <Image
+          source={require("@/assets/images/pirate.png")}
+          style={{ height: height / 2, width: "100%" }}
+        />
 
-          <Button text="Play" onPress={() => navigation.navigate("Rules")} />
-          <Button text="SETTINGS" />
-        </View>
-     
+        <Button text="Play" onPress={() => navigation.navigate("Rules")} />
+        <Button
+          text={`${musicOn ? "Disable" : "Enable"} Music`}
+          onPress={async () => {
+            if (musicOn) {
+              off();
+            } else {
+              on();
+            }
+          }}
+        />
+      </View>
     </View>
   );
 }

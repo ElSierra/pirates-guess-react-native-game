@@ -2,10 +2,11 @@ import { View, Text, Dimensions } from "react-native";
 import React from "react";
 import { ImageBackground, Image } from "expo-image";
 import Button from "@/components/global/Button";
+import { RulesScreen } from "@/types/navigation";
 
 const { height, width } = Dimensions.get("window");
 
-export default function Rules() {
+export default function Rules({ navigation }: RulesScreen) {
   return (
     <View style={{ flex: 1, padding: 20 }}>
       <Image
@@ -30,17 +31,28 @@ export default function Rules() {
             </Text>
             <Text style={{ fontFamily: "pung", fontSize: 20 }}>
               2. Subtract from it constituents its numbers. (eg, the number 63
-              necessary to subtract 6 and 3, you get 54)
+              63 - (6+3), you get 54)
             </Text>
             <Text style={{ fontFamily: "pung", fontSize: 20 }}>
               3. Find this number in the table and the symbol to which it
               corresponds.
             </Text>
+            <Text style={{ fontFamily: "pung", fontSize: 20 }}>
+             4. The pirate will read your mind and tell you the symbol
+            </Text>
           </View>
         </ImageBackground>
-        <Button height={70} text="Go"/>
+        <Button
+          height={70}
+          text="Continue"
+          onPress={() => navigation.navigate("Game")}
+        />
+        <Button
+          height={70}
+          text="Go Back"
+          onPress={() => navigation.goBack()}
+        />
       </View>
-      
     </View>
   );
 }

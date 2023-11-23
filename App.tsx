@@ -6,6 +6,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { NavigationContainer } from "@react-navigation/native";
 import { MainApp } from "@/navigation/Main";
 import { ImageBackground } from "expo-image";
+import { useMusicStore } from "@/zustand/store";
 SplashScreen.preventAutoHideAsync();
 export default function App() {
   const [fontsLoaded, fontError] = useFonts({
@@ -31,6 +32,7 @@ export default function App() {
   if (!fontsLoaded && !fontError) {
     return null;
   }
+  
   return (
     <NavigationContainer onReady={onLoaded}>
       <StatusBar style="light" />
