@@ -1,4 +1,4 @@
-import { View, Dimensions } from "react-native";
+import { View, Dimensions, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import { ImageBackground, Image } from "expo-image";
 import Button from "@/components/global/Button";
@@ -11,7 +11,7 @@ const { height, width } = Dimensions.get("window");
 export default function Menu({ navigation }: MenuScreen) {
   const { musicOn, off, on } = useMusicStore();
   return (
-    <View style={{ flex: 1 }}>
+    <ScrollView style={{ flex: 1 }}>
       <View style={{ flex: 1, alignItems: "center" }}>
         <Image
           source={require("@/assets/images/pirate.png")}
@@ -21,7 +21,7 @@ export default function Menu({ navigation }: MenuScreen) {
         <Button text="Play" onPress={() => navigation.navigate("Rules")} />
         <Button
           text={`${musicOn ? "Disable" : "Enable"} Music`}
-          onPress={async () => {
+          onPress={() => {
             if (musicOn) {
               off();
             } else {
@@ -30,6 +30,6 @@ export default function Menu({ navigation }: MenuScreen) {
           }}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 }

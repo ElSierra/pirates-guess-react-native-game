@@ -7,10 +7,38 @@ import { NavigationContainer } from "@react-navigation/native";
 import { MainApp } from "@/navigation/Main";
 import { ImageBackground, ImageSource } from "expo-image";
 import { Asset, useAssets } from "expo-asset";
-import { useMusicStore } from "@/zustand/store";
+import { useIconStore, useMusicStore } from "@/zustand/store";
 SplashScreen.preventAutoHideAsync();
 export default function App() {
+  const { iconAssets, setIconAssets } = useIconStore();
   const [assets, error] = useAssets([require("@/assets/images/bg.webp")]);
+  const [assetsIcon, errorIcon] = useAssets([
+    require("@/assets/symbols/1.svg"),
+    require("@/assets/symbols/2.svg"),
+    require("@/assets/symbols/3.svg"),
+    require("@/assets/symbols/4.svg"),
+    require("@/assets/symbols/5.svg"),
+    require("@/assets/symbols/6.svg"),
+    require("@/assets/symbols/7.svg"),
+    require("@/assets/symbols/8.svg"),
+    require("@/assets/symbols/9.svg"),
+    require("@/assets/symbols/10.svg"),
+    require("@/assets/symbols/11.svg"),
+    require("@/assets/symbols/12.svg"),
+    require("@/assets/symbols/13.svg"),
+    require("@/assets/symbols/14.svg"),
+    require("@/assets/symbols/15.svg"),
+    require("@/assets/symbols/16.svg"),
+    require("@/assets/symbols/17.svg"),
+    require("@/assets/symbols/18.svg"),
+    require("@/assets/symbols/19.svg"),
+    require("@/assets/symbols/20.svg"),
+    require("@/assets/symbols/21.svg"),
+    require("@/assets/symbols/22.svg"),
+    require("@/assets/symbols/23.svg"),
+    require("@/assets/symbols/24.svg"),
+    require("@/assets/symbols/25.svg"),
+  ]);
   const [fontsLoaded, fontError] = useFonts({
     breathFire: require("@/assets/fonts/BreatheFire.otf"),
     luckiestGuy: require("@/assets/fonts/LuckiestGuy-Regular.ttf"),
@@ -22,15 +50,13 @@ export default function App() {
     latoThin: require("@/assets/fonts/Lato-Thin.ttf"),
   });
   const onLoaded = useCallback(async () => {
-    if ((fontsLoaded && assets) || fontError) {
-      console.log(
-        "🚀 ~ file: App.tsx:19 ~ onLoaded ~ fontsLoaded:",
-        fontsLoaded
-      );
-      setTimeout(async() => {
-      await SplashScreen.hideAsync();}, 1000);
+    if ((fontsLoaded && assets && assetsIcon) || fontError) {
+      assetsIcon && setIconAssets(assetsIcon);
+      setTimeout(async () => {
+        await SplashScreen.hideAsync();
+      }, 1000);
     }
-  }, [fontsLoaded, fontError, assets]);
+  }, [fontsLoaded, fontError, assets, assetsIcon]);
 
   if (!fontsLoaded && !fontError) {
     return null;

@@ -1,4 +1,4 @@
-import { View, Text, Dimensions } from "react-native";
+import { View, Text, Dimensions, ScrollView } from "react-native";
 import React from "react";
 import { ImageBackground, Image } from "expo-image";
 import Button from "@/components/global/Button";
@@ -8,7 +8,7 @@ const { height, width } = Dimensions.get("window");
 
 export default function Rules({ navigation }: RulesScreen) {
   return (
-    <View style={{ flex: 1, padding: 20 }}>
+    <ScrollView contentContainerStyle={{paddingBottom:height/4}} style={{ flex: 1, padding: 20 }}>
       <Image
         source={require("@/assets/images/eeeee.png")}
         contentFit="contain"
@@ -19,7 +19,7 @@ export default function Rules({ navigation }: RulesScreen) {
           source={require("@/assets/images/scroll.png")}
           contentFit="fill"
           style={{
-            height: "60%",
+            height: "70%",
             width: "100%",
             alignItems: "center",
             justifyContent: "center",
@@ -53,6 +53,6 @@ export default function Rules({ navigation }: RulesScreen) {
           onPress={() => navigation.goBack()}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 }

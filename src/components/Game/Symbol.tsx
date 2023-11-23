@@ -27,12 +27,18 @@ export default function Symbol({
         <Text style={{ fontFamily: "pung", fontSize: 20, width: 20 }}>
           {number}
         </Text>
-       
-        <Image
-        
-          source={assets[number % 9 === 0 ? selectedNumber : randomNumber] as ImageSource}
-          style={{ height: 60, width: 60 }}
-        />
+
+        {assets.length === 25 && (
+          <Image
+          transition={2000}
+            source={
+              assets[
+                number % 9 === 0 ? selectedNumber : randomNumber
+              ] as ImageSource
+            }
+            style={{ height: 60, width: 60 }}
+          />
+        )}
       </ImageBackground>
     ) : null;
   }
