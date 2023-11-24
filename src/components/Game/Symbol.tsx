@@ -28,9 +28,9 @@ export default function Symbol({
           {number}
         </Text>
 
-        {assets.length === 25 && (
+        
           <Image
-          transition={2000}
+      
             source={
               assets[
                 number % 9 === 0 ? selectedNumber : randomNumber
@@ -38,7 +38,7 @@ export default function Symbol({
             }
             style={{ height: 60, width: 60 }}
           />
-        )}
+        
       </ImageBackground>
     ) : null;
   }

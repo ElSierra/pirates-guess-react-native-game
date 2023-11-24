@@ -47,7 +47,6 @@ export default function Game({ navigation }: GameScreen) {
               contentContainerStyle={{
                 padding: 10,
               }}
-              initialNumToRender={10}
               columnWrapperStyle={{ justifyContent: "space-between" }}
               numColumns={4}
               renderItem={({ index }) => (
