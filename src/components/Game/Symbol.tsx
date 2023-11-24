@@ -1,8 +1,9 @@
 import { View, Text } from "react-native";
 import { Image, ImageBackground, ImageSource } from "expo-image";
 import { Asset, useAssets } from "expo-asset";
+import React from "react";
 
-export default function Symbol({
+function Symbol({
   number,
   assets,
   selectedNumber,
@@ -13,8 +14,9 @@ export default function Symbol({
 }) {
   //random number from 1 to 50
 
-  const randomNumber: number = Math.floor(Math.random() * 24 + 1);
+  const randomNumber: number = Math.floor(Math.random() * 17 + 1);
   console.log("🚀 ~ file: Symbol.tsx:7 ~ Symbol ~ randomNumber:", randomNumber);
+
   if (randomNumber) {
     return assets ? (
       <ImageBackground
@@ -28,18 +30,21 @@ export default function Symbol({
           {number}
         </Text>
 
-        
-          <Image
-      
-            source={
-              assets[
-                number % 9 === 0 ? selectedNumber : randomNumber
-              ] as ImageSource
-            }
-            style={{ height: 60, width: 60 }}
-          />
-        
+        <Image
+          source={
+            assets[
+              number % 9 === 0 && number !== 0
+                ? selectedNumber
+                : number === 2 || number === 5 || number === 28
+                ? randomNumber
+                : randomNumber
+            ] as ImageSource
+          }
+          style={{ height: 60, width: 60 }}
+        />
       </ImageBackground>
     ) : null;
   }
 }
+
+export default React.memo(Symbol);
