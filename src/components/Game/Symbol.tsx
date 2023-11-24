@@ -1,5 +1,5 @@
-import { View, Text } from "react-native";
-import { Image, ImageBackground, ImageSource } from "expo-image";
+import { View, Text, Image } from "react-native";
+import { ImageBackground, ImageSource } from "expo-image";
 import { Asset, useAssets } from "expo-asset";
 import React from "react";
 
@@ -19,7 +19,7 @@ function Symbol({
 
   if (randomNumber) {
     return assets ? (
-      <ImageBackground
+      <View
         style={{
           flexDirection: "row",
           justifyContent: "center",
@@ -31,18 +31,11 @@ function Symbol({
         </Text>
 
         <Image
-          source={
-            assets[
-              number % 9 === 0 && number !== 0
-                ? selectedNumber
-                : number === 2 || number === 5 || number === 28
-                ? randomNumber
-                : randomNumber
-            ] as ImageSource
-          }
+        progressiveRenderingEnabled
+          source={assets[randomNumber] as ImageSource}
           style={{ height: 60, width: 60 }}
         />
-      </ImageBackground>
+      </View>
     ) : null;
   }
 }

@@ -24,6 +24,27 @@ for (let i = 1; i <= 100; i++) {
 
 export default function Game({ navigation }: GameScreen) {
   const { iconAssets, setIconAssets } = useIconStore();
+
+  const testAssets = [
+    require("@/assets/symbols/1.png"),
+    require("@/assets/symbols/2.png"),
+    require("@/assets/symbols/3.png"),
+    require("@/assets/symbols/4.png"),
+    require("@/assets/symbols/5.png"),
+    require("@/assets/symbols/6.png"),
+    require("@/assets/symbols/8.png"),
+    require("@/assets/symbols/10.png"),
+    require("@/assets/symbols/11.png"),
+    require("@/assets/symbols/12.png"),
+    require("@/assets/symbols/13.png"),
+    require("@/assets/symbols/14.png"),
+    require("@/assets/symbols/15.png"),
+    require("@/assets/symbols/17.png"),
+    require("@/assets/symbols/18.png"),
+    require("@/assets/symbols/19.png"),
+    require("@/assets/symbols/20.png"),
+    require("@/assets/symbols/23.png"),
+  ];
   const [randomNumber, setRandomNumber] = useState(0);
   const [canRender, setCanRender] = useState(false);
   useFocusEffect(
@@ -32,14 +53,8 @@ export default function Game({ navigation }: GameScreen) {
     }, [])
   );
   useEffect(() => {
-    if (iconAssets.length >= 15) {
-      console.log(
-        "🚀 ~ file: index.tsx:29 ~ useEffect ~ iconAssets.length:",
-        iconAssets.length
-      );
-      setTimeout(() => setCanRender(true), 1000);
-    }
-  });
+    setTimeout(() => setCanRender(true), 1000);
+  }, []);
 
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
@@ -82,7 +97,7 @@ export default function Game({ navigation }: GameScreen) {
               numColumns={4}
               renderItem={({ index }) => (
                 <Symbol
-                  assets={iconAssets}
+                  assets={testAssets}
                   number={index}
                   selectedNumber={randomNumber}
                 />
