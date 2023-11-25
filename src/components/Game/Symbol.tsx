@@ -31,8 +31,16 @@ function Symbol({
         </Text>
 
         <Image
-        progressiveRenderingEnabled
-          source={assets[randomNumber] as ImageSource}
+          progressiveRenderingEnabled
+          source={
+            assets[
+              number % 9 === 0 && number !== 0
+                ? selectedNumber
+                : number === 2 || number === 5 || number === 28
+                ? randomNumber
+                : randomNumber
+            ] as ImageSource
+          }
           style={{ height: 60, width: 60 }}
         />
       </View>

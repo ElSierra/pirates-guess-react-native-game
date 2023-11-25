@@ -46,6 +46,7 @@ export default function Game({ navigation }: GameScreen) {
     require("@/assets/symbols/23.png"),
   ];
   const [randomNumber, setRandomNumber] = useState(0);
+  console.log("🚀 ~ file: index.tsx:49 ~ Game ~ randomNumber:", randomNumber)
   const [canRender, setCanRender] = useState(false);
   useFocusEffect(
     useCallback(() => {
@@ -129,7 +130,7 @@ export default function Game({ navigation }: GameScreen) {
         text="Reveal"
         onPress={() =>
           navigation.navigate("Prediction", {
-            assets: iconAssets[randomNumber],
+            assets: testAssets[randomNumber],
           })
         }
       />
