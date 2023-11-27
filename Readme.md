@@ -1,6 +1,8 @@
 # Pirate's Guess
 
-Welcome to the Pirate's guess, a React Native application where players guess, and the pirate reads your mind.
+![UI](/screenshot/pirateguess.jpg "Pirate's guess")
+
+Welcome to the Pirate's guess, a React Game where players guess, and the pirate reads your mind.
 
 ## Getting Started
 
