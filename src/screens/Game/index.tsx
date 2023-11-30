@@ -46,7 +46,7 @@ export default function Game({ navigation }: GameScreen) {
     require("@/assets/symbols/23.png"),
   ];
   const [randomNumber, setRandomNumber] = useState(0);
-  console.log("🚀 ~ file: index.tsx:49 ~ Game ~ randomNumber:", randomNumber)
+  console.log("🚀 ~ file: index.tsx:49 ~ Game ~ randomNumber:", randomNumber);
   const [canRender, setCanRender] = useState(false);
   useFocusEffect(
     useCallback(() => {
@@ -78,6 +78,22 @@ export default function Game({ navigation }: GameScreen) {
 
     Animated.loop(sequence).start();
   }, [fadeAnim]);
+
+  const renderItem = ({ item,index }: { item: number, index:number }) => {
+    return (
+        <Symbol
+          assets={testAssets}
+          number={index}
+          selectedNumber={randomNumber}
+        />
+      
+    );
+  };
+  const handlePress = useCallback(() => {
+    navigation.navigate('Prediction', {
+      assets: testAssets[randomNumber],
+    });
+  }, [navigation, randomNumber, testAssets]);
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <ImageBackground
@@ -88,21 +104,16 @@ export default function Game({ navigation }: GameScreen) {
         {canRender ? (
           <View style={{ paddingTop: 100, paddingBottom: 60, width: "100%" }}>
             <FlatList
-              data={data}
-              showsVerticalScrollIndicator={false}
-              fadingEdgeLength={40}
-              contentContainerStyle={{
-                padding: 10,
-              }}
-              columnWrapperStyle={{ justifyContent: "space-between" }}
-              numColumns={4}
-              renderItem={({ index }) => (
-                <Symbol
-                  assets={testAssets}
-                  number={index}
-                  selectedNumber={randomNumber}
-                />
-              )}
+               data={data}
+               showsVerticalScrollIndicator={false}
+               fadingEdgeLength={40}
+               contentContainerStyle={{ padding: 10 }}
+               renderItem={renderItem}
+               columnWrapperStyle={{ justifyContent: 'space-between' }}
+               numColumns={4}
+               removeClippedSubviews={true}
+               initialNumToRender={20} 
+               maxToRenderPerBatch={20}
             />
           </View>
         ) : (
@@ -128,11 +139,8 @@ export default function Game({ navigation }: GameScreen) {
       </ImageBackground>
       <Button
         text="Reveal"
-        onPress={() =>
-          navigation.navigate("Prediction", {
-            assets: testAssets[randomNumber],
-          })
-        }
+        onPress={handlePress}
+        
       />
     </View>
   );
